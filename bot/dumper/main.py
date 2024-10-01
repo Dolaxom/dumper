@@ -1,6 +1,6 @@
 from discord_client import create_bot, run_bot
-from on_message_handler import on_message_handler
-from on_ready_handler import on_ready_handler
+from events.on_message_handler import on_message_handler
+from events.on_ready_handler import on_ready_handler
 
 bot = create_bot()
 
