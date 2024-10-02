@@ -9,4 +9,4 @@ import logging
 logging.basicConfig(level=logging.INFO, filename="traces.log",filemode="w")
 
 def log_message_from_discord_client(data, time):
-    logging.info(f"{time.strftime("%m/%d/%Y, %H:%M:%S")}: {data}")
+    logging.info(f"{time.strftime('%m/%d/%Y, %H:%M:%S')}: {data}")
