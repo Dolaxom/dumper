@@ -1,4 +1,10 @@
-from logger import log_message
+"""
+Message arrival event handler from discord client
+
+Provides the main on_message_handler() function and its helpers.
+"""
+
+from logger import log_message_from_discord_client
 from datetime import datetime
 
 def on_message_handler(bot):
@@ -8,7 +14,7 @@ def on_message_handler(bot):
             return
 
         data = on_message_response_builder(message)
-        log_message(data, datetime.now())
+        log_message_from_discord_client(data, datetime.now())
 
 def on_message_response_builder(message):
     data = {
