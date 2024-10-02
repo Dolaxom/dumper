@@ -1,3 +1,9 @@
+"""
+Module of interaction with discord package
+
+Provides initialization and launching of discord client (bot)
+"""
+
 import discord
 from dotenv import dotenv_values
 
