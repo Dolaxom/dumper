@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from events.on_message_handler import on_message_response_builder
+from ..events.on_message_handler import on_message_response_builder
 
 class OnMessageHandler(unittest.TestCase):
     def test_on_message_response_builder(self):
