@@ -8,15 +8,15 @@ from logger import log_message_from_discord_client
 from datetime import datetime
 
 def on_message_handler(bot):
-   """
+    """
 
     Incoming message handler from discord client. Logic: Validation -> Processing -> Logging
 
     Parameters:
 
-    bot: A discord.py package client object 
+    bot: A discord.py package client object
 
-   """
+    """
 
     @bot.client.event
     async def on_message(message):
@@ -27,7 +27,7 @@ def on_message_handler(bot):
         log_message_from_discord_client(data, datetime.now())
 
 def on_message_response_builder(message):
-   """
+    """
  
     Create a Json object with data about a message received from a Discord client
  
@@ -39,7 +39,7 @@ def on_message_response_builder(message):
  
     Json object
 
-   """
+    """
 
     data = {
         "server": {
