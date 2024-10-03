@@ -23,6 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install aiohttp
         python -m pip install discord.py
+        python -m pip install python-dotenv
 
     - name: Run unit tests
       run: |
