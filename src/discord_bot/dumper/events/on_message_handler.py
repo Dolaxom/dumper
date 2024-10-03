@@ -3,11 +3,17 @@ Message arrival event handler from discord client
 
 Provides the main on_message_handler() function and its helpers.
 """
+import aiohttp
+import discord
+from dotenv import dotenv_values
 
-from logger import log_message_from_discord_client
+from discord_client import DiscordClient
+from logger import log_with_timestamp
 from datetime import datetime
 
-def on_message_handler(bot):
+config = dotenv_values()
+
+def on_message_handler(bot: DiscordClient):
     """
 
     Incoming message handler from discord client. Logic: Validation -> Processing -> Logging
@@ -19,16 +25,17 @@ def on_message_handler(bot):
     """
 
     @bot.client.event
-    async def on_message(message):
-        if on_message_validator(message, bot):
+    async def on_message(message: discord.Message):
+        if message_validator(message, bot):
             return
 
-        data = on_message_response_builder(message)
-        log_message_from_discord_client(data, datetime.now())
+        data = message_request_builder(message)
+        await send_message_to_daas(data)
+        log_with_timestamp(data, datetime.now())
 
-def on_message_response_builder(message):
+def message_request_builder(message: discord.Message):
     """
- 
+
     Create a Json object with data about a message received from a Discord client
  
     Parameters:
@@ -37,7 +44,7 @@ def on_message_response_builder(message):
  
     Returns:
  
-    Json object
+    Json object {server{id, name}, chat{id, name}, author{id, name}, content}
 
     """
 
@@ -59,6 +66,14 @@ def on_message_response_builder(message):
 
     return data
 
-def on_message_validator(message, bot):
+def message_validator(message: discord.Message, bot: DiscordClient):
     # Ignore private messages and messages from yourself(bot)
     return message.author == bot.client.user or not message.channel.guild
+
+async def send_message_to_daas(data: dict):
+    url = str(config['DAAS_URL']) + '/api/v1/message'
+    headers = {'Content-Type': 'application/json'}
+
+    async with aiohttp.ClientSession(url) as session:
+        async with session.post(url, json=data, headers=headers) as response:
+            log_with_timestamp(response.status, datetime.now())

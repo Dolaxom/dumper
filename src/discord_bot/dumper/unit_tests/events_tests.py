@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from ..events.on_message_handler import on_message_response_builder
+from ..events.on_message_handler import message_request_builder
 
 class OnMessageHandler(unittest.TestCase):
     def test_on_message_response_builder(self):
@@ -14,7 +14,7 @@ class OnMessageHandler(unittest.TestCase):
         message.channel.name = 'Some Channel'
         message.channel.id = 6789
 
-        data = on_message_response_builder(message)
+        data = message_request_builder(message)
 
         expected_data = {
             "server": {
