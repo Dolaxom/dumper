@@ -34,7 +34,7 @@ struct Author : ISerializable {
     void FromJson(std::string_view json_str) override;
 };
 
-struct Message : ISerializable{
+struct Message : ISerializable {
     Server server;
     Channel channel;
     Author author;
