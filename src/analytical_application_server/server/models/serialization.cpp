@@ -3,34 +3,34 @@
 
 namespace model {
 
-std::string Server::ToJson() const {
+std::string Server::ToJson(int dump) const {
   nlohmann::json data;
 
   data["id"] = id;
   data["name"] = name;
 
-  return data.dump();
+  return data.dump(dump);
 }
 
-std::string Channel::ToJson() const {
+std::string Channel::ToJson(int dump) const {
   nlohmann::json data;
 
   data["id"] = id;
   data["name"] = name;
 
-  return data.dump();
+  return data.dump(dump);
 }
 
-std::string Author::ToJson() const {
+std::string Author::ToJson(int dump) const {
   nlohmann::json data;
 
   data["id"] = id;
   data["name"] = name;
 
-  return data.dump();
+  return data.dump(dump);
 }
 
-std::string Message::ToJson() const {
+std::string Message::ToJson(int dump) const {
   using json = nlohmann::json;
   json data;
 
@@ -51,7 +51,7 @@ std::string Message::ToJson() const {
   data["author"] = author_data;
   data["content"] = content;
 
-  return data.dump();
+  return data.dump(dump);
 }
 
 } // namespace model
