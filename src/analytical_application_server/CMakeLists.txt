@@ -13,6 +13,8 @@ add_library(${PROJECT_NAME}_objs OBJECT
     server/models/schema.hpp
     server/models/serialization.cpp
     server/models/deserialization.cpp
+
+    server/controllers/common/message_writer.hpp
 )
 
 target_link_libraries(${PROJECT_NAME}_objs userver::core nlohmann_json::nlohmann_json)

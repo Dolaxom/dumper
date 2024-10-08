@@ -14,7 +14,7 @@ void Server::FromJson(std::string_view json_str) {
 
         if (data.find("id") == data.end() || data.find("name") == data.end()) {
             Server server{};
-            throw std::invalid_argument("Example of Json object from the Server struct: " + server.ToJson());
+            throw std::invalid_argument("Example of Json object from the Server struct:\n" + server.ToJson(2));
         }
     } catch (const std::exception& ex) {
         throw std::invalid_argument("Server::FromJson: "s + ex.what());
@@ -31,7 +31,7 @@ void Channel::FromJson(std::string_view json_str) {
 
         if (data.find("id") == data.end() || data.find("name") == data.end()) {
             Channel channel{};
-            throw std::invalid_argument("Channel::FromJson: Example of Json object from the Channel struct: " + channel.ToJson());
+            throw std::invalid_argument("Channel::FromJson: Example of Json object from the Channel struct:\n" + channel.ToJson(2));
         }
     } catch (const std::exception& ex) {
         throw std::invalid_argument(ex.what());
@@ -48,7 +48,7 @@ void Author::FromJson(std::string_view json_str) {
 
         if (data.find("id") == data.end() || data.find("name") == data.end()) {
             Author author{};
-            throw std::invalid_argument("Author::FromJson: Example of Json object from the Author struct: " + author.ToJson());
+            throw std::invalid_argument("Author::FromJson: Example of Json object from the Author struct:\n" + author.ToJson(2));
         }
     } catch (const std::exception& ex) {
         throw std::invalid_argument(ex.what());
@@ -64,8 +64,8 @@ void Message::FromJson(std::string_view json_str) {
         data = nlohmann::json::parse(json_str);
 
         if (data.find("server") == data.end() || data.find("channel") == data.end()) {
-            Server server{};
-            throw std::invalid_argument("Message::FromJson: Example of Json object from the Server struct: " + server.ToJson());
+            Message msg{};
+            throw std::invalid_argument("Message::FromJson: Example of Json object from the Message struct:\n" + msg.ToJson(2));
         }
     } catch (const std::exception& ex) {
         throw std::invalid_argument(ex.what());
